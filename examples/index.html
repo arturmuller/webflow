@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .container {
+        background-color: #ffe4c4;
+        /* height: 400px; */
+        overflow: auto;
+      }
+
+      .item {
+        height: 300px;
+        color: aquamarine;
+      }
+
+      [data-observed] {
+        color: red;
+      }
+    </style>
+  </head>
+  <body data-scroll-down="#down">
+    <div class="container" data-scroll-up="#left" data-scroll-down="#right">
+      <button id="left" onclick="console.log('Left clicked')">Left</button>
+      <button id="right" onclick="console.log('Right clicked')">Right</button>
+      <div class="item"></div>
+      <div class="item"></div>
+      <div class="item"></div>
+    </div>
+    <button id="down" onclick="console.log('down')">You're going down</button>
+    <div data-observed onclick="console.log('Hello!')">
+      It's a me! Mario!
+    </div>
+  </body>
+  <script>
+    !function(e){"function"==typeof define&&define.amd?define(e):e()}((function(){"use strict";function e(e,n,t){document.querySelectorAll(e).forEach((function(o){if(!(o instanceof HTMLElement))return console.error("Element with ["+e+"] is not a HTML Element");var r=n(o);if(!r)return console.warn("The ["+e+"] attribute does not provide any value. Please provide selector.");var c=document.querySelectorAll(r);if(0===c.length)return console.warn("No elements matched the selector provided in ["+e+'="'+r+'"].');o.addEventListener("wheel",function(e,n){var t,o=!0;function r(){o=!0}return function(){o?(n.apply(void 0,arguments),o=!1,t=setTimeout(r,100)):(clearTimeout(t),t=setTimeout(r,100))}}(0,(function(e){t(e)&&c.forEach((function(e){e.dispatchEvent(new Event("click"))}))})))}))}window.addEventListener("load",(function(){var n;e("[data-scroll-up]",(function(e){return e.dataset.scrollUp}),(function(e){return e.deltaY<0})),e("[data-scroll-down]",(function(e){return e.dataset.scrollDown}),(function(e){return e.deltaY>0})),n=new IntersectionObserver((function(e){return e.forEach((function(e){e.isIntersecting&&e.target.dispatchEvent(new Event("click"))}))}),{root:null,threshold:1}),document.querySelectorAll("[data-observed]").forEach((function(e){n.observe(e)}))}))}));
+  </script>
+</html>
