@@ -39,7 +39,7 @@ function attachObserver(selector: string) {
     entries =>
       entries.forEach(entry => {
         if (entry.isIntersecting) {
-          entry.target.dispatchEvent(new Event('click'));
+          (entry.target as any).click();
         }
       }),
     { root: null, threshold: 1.0 }
@@ -81,28 +81,10 @@ function attachScrollListener(
       throttle(100, (event: WheelEvent) => {
         if (shouldTrigger(event)) {
           targets.forEach(element => {
-            element.dispatchEvent(new Event('click'));
+            (element as any).click();
           });
         }
       })
     );
   });
 }
-// // var onScroll = throttle(function(direction) {
-// //   if (direction == false) {
-// //     $('#w-slider-arrow-right').trigger('tap');
-// //   } else {
-// //     $('#w-slider-arrow-left').trigger('tap');
-// //   }
-// // }, 100);
-
-// // $('#slider').bind('wheel mousewheel', function(e) {
-// //   e.preventDefault();
-// //   var delta;
-// //   if (typeof event != 'undefined' && event.wheelDelta) {
-// //     delta = event.wheelDelta;
-// //   } else {
-// //     delta = -1 * e.originalEvent.deltaY;
-// //   }
-// //   onScroll(delta >= 0);
-// // });
